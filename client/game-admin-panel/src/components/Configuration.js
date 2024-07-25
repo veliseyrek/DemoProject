@@ -1,10 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Container, Typography, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, MenuItem, Snackbar, Alert,IconButton } from '@mui/material';
+import {
+  Container,
+  Typography,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+  MenuItem,
+  Snackbar,
+  Alert,
+  IconButton,
+  Box,
+  Paper,
+} from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
-import { getConfigurations, addConfiguration,deleteConfiguration  } from '../services/api';
-import { Delete,Logout } from '@mui/icons-material'; 
+import { getConfigurations, addConfiguration, deleteConfiguration } from '../services/api';
+import { Delete, AddCircleOutline, Logout } from '@mui/icons-material';
 import '../assets/configuration.css';
 
 const Configuration = () => {
@@ -21,7 +36,6 @@ const Configuration = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-   
     const fetchConfigs = async () => {
       try {
         const data = await getConfigurations();
@@ -33,20 +47,18 @@ const Configuration = () => {
     };
 
     const fetchData = async () => {
-      debugger;
       const token = localStorage.getItem('token');
 
       if (!token) {
-        navigate('/login'); 
+        navigate('/login');
         return;
       }
 
       try {
-        debugger;
         const response = await axios.get('https://localhost:7294/api/configurations', {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
         setConfigs(response.data);
         setLoading(false);
@@ -56,13 +68,10 @@ const Configuration = () => {
     };
 
     fetchData();
-
     fetchConfigs();
   }, [navigate]);
 
   const handleAddConfig = async () => {
-    debugger;
-
     if (buildingCost <= 0) {
       showError('Building cost must be a positive number.');
       return;
@@ -80,26 +89,25 @@ const Configuration = () => {
     try {
       await addConfiguration(newConfig);
       setConfigs([...configs, newConfig]);
-      setAddedTypes([...addedTypes, buildingType]); 
+      setAddedTypes([...addedTypes, buildingType]);
       setBuildingType('');
       setBuildingCost('');
       setConstructionTime('');
-      setOpen(false); 
+      setOpen(false);
       showSuccess('Configuration added successfully.');
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleDeleteConfig = async (id) => {
+  const handleDeleteConfig = async id => {
     try {
-      debugger;
       await deleteConfiguration(id);
 
       const deletedConfig = configs.find(config => config.id === id);
-    
+
       if (deletedConfig) {
-      setAddedTypes(addedTypes.filter(type => type !== deletedConfig.buildingType));
+        setAddedTypes(addedTypes.filter(type => type !== deletedConfig.buildingType));
       }
 
       setConfigs(configs.filter(config => config.id !== id));
@@ -109,22 +117,24 @@ const Configuration = () => {
       showError('Failed to delete configuration.');
     }
   };
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/login');
   };
-  const showError = (message) => {
+
+  const showError = message => {
     setErrorMessage(message);
     setTimeout(() => {
       setErrorMessage('');
-    }, 5000); 
+    }, 5000);
   };
 
-  const showSuccess = (message) => {
+  const showSuccess = message => {
     setSuccessMessage(message);
     setTimeout(() => {
       setSuccessMessage('');
-    }, 5000); 
+    }, 5000);
   };
 
   const handleClickOpen = () => {
@@ -136,16 +146,16 @@ const Configuration = () => {
   };
 
   const columns = [
-    { field: 'buildingType', headerName: 'Building Type', width: 350, headerClassName: 'header-style' },
-    { field: 'buildingCost', headerName: 'Building Cost', width: 350 , headerClassName: 'header-style' },
-    { field: 'constructionTime', headerName: 'Construction Time', width: 350 , headerClassName: 'header-style' },
+    { field: 'buildingType', headerName: 'Building Type', flex: 1, headerClassName: 'header-style' },
+    { field: 'buildingCost', headerName: 'Building Cost', flex: 1, headerClassName: 'header-style' },
+    { field: 'constructionTime', headerName: 'Construction Time', flex: 1, headerClassName: 'header-style' },
     {
-      field: '',
-      headerName: '',
-      width: 100,
+      field: 'actions',
+      headerName: 'Actions',
+      flex: 0.5,
       sortable: false,
-      renderCell: (params) => (
-        <IconButton color='error' onClick={() => handleDeleteConfig(params.row.id)}>
+      renderCell: params => (
+        <IconButton color="error" onClick={() => handleDeleteConfig(params.row.id)}>
           <Delete />
         </IconButton>
       ),
@@ -153,27 +163,45 @@ const Configuration = () => {
   ];
 
   const rows = configs.map((config, index) => ({
-    id: index+1, 
-    ...config
+    id: index + 1,
+    ...config,
   }));
+
   return (
-    <Container>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant="h4" gutterBottom>
-          Configuration
-        </Typography>
-        <Button variant="contained" color="primary" onClick={handleLogout} startIcon={<Logout />}>
-          Logout
-        </Button>
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}>
-        <Button variant="contained" color="primary" onClick={handleClickOpen}>
-          Add Configuration
-        </Button>
-      </div>
-      <div style={{ height: 400, width: '100%', marginTop: '20px', backgroundColor: 'white' }}>
-        <DataGrid sx={{borderRadius:2,boxShadow:3}} rows={rows} columns={columns} pageSize={5} />
-      </div>
+    <Container maxWidth="md" style={{ backgroundImage: 'url("/path/to/your/background.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
+      <Box sx={{ pt: 5, pb: 2 }}>
+        <Paper elevation={3} sx={{ p: 4, backdropFilter: 'blur(10px)', backgroundColor: 'rgba(255, 255, 255, 0.8)' }}>
+          <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+            <Typography variant="h4" gutterBottom>
+              Configuration
+            </Typography>
+            <Button variant="contained" color="secondary" onClick={handleLogout} startIcon={<Logout />}>
+              Logout
+            </Button>
+          </Box>
+          <Box display="flex" justifyContent="flex-end" mb={3}>
+            <Button variant="contained" color="primary" onClick={handleClickOpen} startIcon={<AddCircleOutline />}>
+              Add Configuration
+            </Button>
+          </Box>
+          <div style={{ height: 400, width: '100%' }}>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              pageSize={5}
+              disableSelectionOnClick
+              sx={{
+                '& .MuiDataGrid-row': {
+                  transition: 'all 0.3s ease',
+                },
+                '& .MuiDataGrid-row:hover': {
+                  transform: 'scale(1.02)',
+                },
+              }}
+            />
+          </div>
+        </Paper>
+      </Box>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add New Configuration</DialogTitle>
         <DialogContent>
@@ -183,9 +211,9 @@ const Configuration = () => {
             fullWidth
             margin="normal"
             value={buildingType}
-            onChange={(e) => setBuildingType(e.target.value)}
+            onChange={e => setBuildingType(e.target.value)}
           >
-            {types.filter(type => !addedTypes.includes(type)).map((type) => (
+            {types.filter(type => !addedTypes.includes(type)).map(type => (
               <MenuItem key={type} value={type}>
                 {type}
               </MenuItem>
@@ -197,7 +225,7 @@ const Configuration = () => {
             fullWidth
             margin="normal"
             value={buildingCost}
-            onChange={(e) => setBuildingCost(e.target.value)}
+            onChange={e => setBuildingCost(e.target.value)}
           />
           <TextField
             label="Construction Time (seconds)"
@@ -205,7 +233,7 @@ const Configuration = () => {
             fullWidth
             margin="normal"
             value={constructionTime}
-            onChange={(e) => setConstructionTime(e.target.value)}
+            onChange={e => setConstructionTime(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
@@ -232,7 +260,3 @@ const Configuration = () => {
 };
 
 export default Configuration;
-
-
-
-

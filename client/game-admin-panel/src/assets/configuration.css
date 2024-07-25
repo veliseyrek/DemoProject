@@ -6,3 +6,11 @@
     font-weight: bold !important;
   }
   
+  .MuiDataGrid-root .MuiDataGrid-row {
+    transition: all 0.3s ease;
+  }
+  
+  .MuiDataGrid-root .MuiDataGrid-row:hover {
+    transform: scale(1.02);
+  }
+  
