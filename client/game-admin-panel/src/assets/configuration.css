@@ -1,0 +1,8 @@
+/* .header-style {
+    font-weight:bolder !important;
+  } */
+
+  .header-style .MuiDataGrid-columnHeaderTitle {
+    font-weight: bold !important;
+  }
+  
