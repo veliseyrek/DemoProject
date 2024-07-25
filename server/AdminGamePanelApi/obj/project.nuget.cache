@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RVbC8KJqVSEZO0+4xhuxaaAh33MfezV/PiW9djT+Hy1Rc7DvyvJnpe8uV7IVELBk+uRSHgYJhZ9l+MoiYFL0ZA==",
+  "dgSpecHash": "Hog6nWrhF2tHC9avxxRsKaVtuspQq6U+fb4OHWFAQDK2+7vgCOswfPYBfwPUttN1fSAiUpfclqz3+sQDWX/AWQ==",
   "success": true,
-  "projectFilePath": "D:\\Veli\\DemoProject1\\server\\AdminGamePanelApi\\AdminGamePanelApi.csproj",
+  "projectFilePath": "D:\\Github\\DemoProject\\server\\AdminGamePanelApi\\AdminGamePanelApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Veli\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\Veli\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",

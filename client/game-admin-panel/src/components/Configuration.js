@@ -37,7 +37,7 @@ const Configuration = () => {
       const token = localStorage.getItem('token');
 
       if (!token) {
-        navigate('/login'); // Token yoksa login sayfasına yönlendir
+        navigate('/login'); 
         return;
       }
 
@@ -51,7 +51,6 @@ const Configuration = () => {
         setConfigs(response.data);
         setLoading(false);
       } catch (error) {
-        // Token geçersiz veya süresi dolmuşsa
         navigate('/login');
       }
     };
@@ -154,7 +153,7 @@ const Configuration = () => {
   ];
 
   const rows = configs.map((config, index) => ({
-    id: index+1, // ID için index kullanıyoruz, gerçek ID kullanımı için API'den alınan ID kullanılabilir
+    id: index+1, 
     ...config
   }));
   return (

@@ -102,7 +102,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthentication();
-//app.UseAuthorization();
+app.UseAuthorization();
 
 app.UseCors("AllowSpecificOrigin");
 
@@ -134,7 +134,7 @@ app.MapPost("/api/login", async (ApplicationDbContext dbContext, User loginUser)
          {
             new Claim(ClaimTypes.Name, user.Username)
          }),
-         Expires = DateTime.UtcNow.AddMinutes(2), // Token geçerlilik süresi
+         Expires = DateTime.UtcNow.AddMinutes(2), 
          Issuer = builder.Configuration["Jwt:Issuer"],
          Audience = builder.Configuration["Jwt:Audience"],
          SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -146,7 +146,7 @@ app.MapPost("/api/login", async (ApplicationDbContext dbContext, User loginUser)
      return Results.Ok(new { Token = tokenString });
      //return Results.Ok();
 });
-// Register endpoint
+
 app.MapPost("/api/register", async (ApplicationDbContext dbContext, User user) =>
 {
     var existingUser = await dbContext.Users
@@ -173,16 +173,11 @@ app.MapPost("/api/configurations", async (MongoDbContext context, BuildingConfig
     {
         return Results.BadRequest("Invalid configuration data.");
     }
-
-    // Veriyi MongoDB koleksiyonuna ekle
     await context.BuildingConfigurations.InsertOneAsync(newConfig);
     return Results.Created($"/api/configurations/{newConfig.Id}", newConfig);
 });
 
-//app.MapDelete("/api/configurations{id}", async (Guid id, MongoDbContext context) =>
-//{
-//    var configuration
-//});
+
 
 
 app.MapDelete("/api/configurations/{id}", async (MongoDbContext context, Guid id) =>

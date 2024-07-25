@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Veli\\DemoProject1\\server\\AdminGamePanelApi\\AdminGamePanelApi.csproj": {}
+    "D:\\Github\\DemoProject\\server\\AdminGamePanelApi\\AdminGamePanelApi.csproj": {}
   },
   "projects": {
-    "D:\\Veli\\DemoProject1\\server\\AdminGamePanelApi\\AdminGamePanelApi.csproj": {
+    "D:\\Github\\DemoProject\\server\\AdminGamePanelApi\\AdminGamePanelApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Veli\\DemoProject1\\server\\AdminGamePanelApi\\AdminGamePanelApi.csproj",
+        "projectUniqueName": "D:\\Github\\DemoProject\\server\\AdminGamePanelApi\\AdminGamePanelApi.csproj",
         "projectName": "AdminGamePanelApi",
-        "projectPath": "D:\\Veli\\DemoProject1\\server\\AdminGamePanelApi\\AdminGamePanelApi.csproj",
+        "projectPath": "D:\\Github\\DemoProject\\server\\AdminGamePanelApi\\AdminGamePanelApi.csproj",
         "packagesPath": "C:\\Users\\Veli\\.nuget\\packages\\",
-        "outputPath": "D:\\Veli\\DemoProject1\\server\\AdminGamePanelApi\\obj\\",
+        "outputPath": "D:\\Github\\DemoProject\\server\\AdminGamePanelApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

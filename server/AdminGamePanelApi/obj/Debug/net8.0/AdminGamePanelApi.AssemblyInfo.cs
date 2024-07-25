@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AdminGamePanelApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0525035b0f6d536ab3abd5a145ec868817085dc4")]
 [assembly: System.Reflection.AssemblyProductAttribute("AdminGamePanelApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AdminGamePanelApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -11,7 +11,6 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // useEffect kullanarak error state'ine göre inputları temizle
   useEffect(() => {
     if (error) {
       const timer = setTimeout(() => {
@@ -25,7 +24,7 @@ const Login = () => {
   }, [error]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Formun varsayılan davranışını önleyin
+    e.preventDefault(); 
 
     if (!username || !password) {
       setError('Username and password are required');
@@ -36,7 +35,7 @@ const Login = () => {
       debugger;
       const response = await login(username, password);
       localStorage.setItem('token', response.token);
-      navigate('/configuration'); // Başarılı girişten sonra yönlendir
+      navigate('/configuration'); 
     } catch (error) {
       setError('Login failed. Please check your credentials.');
     }
@@ -118,8 +117,8 @@ const Login = () => {
               onClick={handleRegisterRedirect}
               sx={{
                 borderRadius: '50px',
-                backgroundColor: '#e0e0e0', // Açık renk
-                color: '#000', // Metin rengi
+                backgroundColor: '#e0e0e0', 
+                color: '#000', 
                 transition: 'background-color 0.3s',
                 '&:hover': {
                   backgroundColor: '#d0d0d0',
